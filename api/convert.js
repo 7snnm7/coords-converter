@@ -1,17 +1,24 @@
 function convert(q) {
-  if (!q) return 'Input should be in this state “!c OX OY OZ” or “!c NX NY NZ” check out twitch.tv/hassannm7';
-  const parts = q.trim().split(/\s+/);
-  const isOverworld = parts[0].toLowerCase() === 'o';
-  const nums = parts.filter(x => !isNaN(x)).map(Number);
+  const mapping = {
+    q: "ض", w: "ص", e: "ث", r: "ق", t: "ف", y: "غ", u: "ع", i: "ه", o: "خ", p: "ح",
+    "[": "ج", "]": "د", a: "ش", s: "س", d: "ي", f: "ب", g: "ل", h: "ا", j: "ت",
+    k: "ن", l: "م", ";": "ك", "'": "ط", z: "ئ", x: "ء", c: "ؤ", v: "ر", b: "لا",
+    n: "ى", m: "ة", ",": "و", ".": "ز", "/": "ظ"
+  };
 
-  if (nums.length < 2 || nums.length > 3)
-    return 'Input should be in this state “!c OX OY OZ” or “!c NX NY NZ” check out twitch.tv/hassannm7';
+  const hasArabic = /[\u0600-\u06FF]/.test(q);
 
-  const factor = isOverworld ? 8 : 1 / 8;
-  const x = Math.round(nums[0] * factor);
-  const z = Math.round(nums[nums.length - 1] * factor);
-  const world = isOverworld ? 'Overworld' : 'Nether';
-  return `${world} Side Coordinates Are: (${x}, Y, ${z})`;
+  if (hasArabic) {
+    return "Input should be in English, so I’ll shoutout my creator, check out twitch.tv/HassanNM7 :D";
+  }
+
+  const converted = q
+    .split("")
+    .map((char) => mapping[char.toLowerCase()] || char)
+    .join("");
+
+  return converted;
 }
 
-convert(q);
+var result = convert(q);
+result;
