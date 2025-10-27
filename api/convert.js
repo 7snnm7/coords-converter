@@ -6,7 +6,7 @@ function convert(q) {
   const nums = parts.filter(x => !isNaN(x)).map(Number);
 
   if (nums.length < 2 || nums.length > 3)
-    return 'Input should be in this state “!c OX OY OZ” or “!c NX NY NZ” check out my creator twitch.tv/hassannm7';
+    return 'Input should be in this state “!c OX OY OZ” or “!c o NX NY NZ” check out my creator twitch.tv/hassannm7';
 
   if (isOver) {
     const x = Math.round(nums[0] * 8);
